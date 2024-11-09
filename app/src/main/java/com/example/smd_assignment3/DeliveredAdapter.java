@@ -15,11 +15,21 @@ import java.util.ArrayList;
 public class DeliveredAdapter extends ArrayAdapter<Product> {
     Context context;
     int resource;
+
+    public interface OnDataChangeListener {
+        void onDataChanged();
+    }
+
+    OnDataChangeListener onDataChangeListener;
+
     public DeliveredAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Product> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
+        onDataChangeListener = (OnDataChangeListener) context;
     }
+
+
 
     @NonNull
     @Override
@@ -46,5 +56,7 @@ public class DeliveredAdapter extends ArrayAdapter<Product> {
         db.open();
         db.updateStatus(p.id,"delivered");
         db.close();
+        notifyDataSetChanged();
+        onDataChangeListener.onDataChanged();
     }
 }

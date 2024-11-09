@@ -21,7 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-public class MainActivity extends AppCompatActivity implements ProductAdapter.itemClickedListener, ScheduledAdapter.ScheduleClickListener {
+public class MainActivity extends AppCompatActivity implements ProductAdapter.itemClickedListener, ScheduledAdapter.ScheduleClickListener, DeliveredAdapter.OnDataChangeListener {
 
 
     TabLayout tabLayout;
@@ -201,4 +201,9 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.it
         }
     }
 
+    @Override
+    public void onDataChanged() {
+        Toast.makeText(this, "called", Toast.LENGTH_SHORT).show();
+        adapter.notifyDataSetChanged();
+    }
 }

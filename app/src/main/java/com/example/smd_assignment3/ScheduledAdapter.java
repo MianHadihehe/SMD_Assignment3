@@ -60,10 +60,10 @@ public class ScheduledAdapter extends ArrayAdapter<Product> {
 
     public void addSchedule(Product product) {
         add(product);
+        notifyDataSetChanged();
         ProductDB db= new ProductDB(context);
         db.open();
         db.updateStatus(product.id,"scheduled");
         db.close();
-        notifyDataSetChanged();
     }
 }
